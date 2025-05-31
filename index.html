@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>تولید وایرگارد حرفه‌ای</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap');
+    body {
+      font-family: 'Vazirmatn', sans-serif;
+      background: linear-gradient(135deg, #1e272e, #2f3640);
+      color: #fff;
+      padding: 30px;
+      text-align: center;
+      direction: rtl;
+    }
+    h1 {
+      color: #00cec9;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    select, input {
+      padding: 12px;
+      width: 90%;
+      max-width: 400px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      margin-top: 8px;
+      background: #dfe6e9;
+      color: #2d3436;
+    }
+    button {
+      margin-top: 30px;
+      padding: 15px 40px;
+      font-size: 18px;
+      border: none;
+      border-radius: 12px;
+      background: #00b894;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #019875;
+    }
+    .output {
+      background: #2d3436;
+      margin-top: 30px;
+      padding: 25px;
+      border-radius: 15px;
+      white-space: pre-wrap;
+      text-align: left;
+      font-size: 15px;
+      line-height: 1.8;
+      direction: ltr;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎮 تولید تنظیمات وایرگارد مخصوص بازی 4ba.ir</h1>
+
+  <label>📅 مدت زمان (روز):</label>
+  <input type="number" id="days" placeholder="مثلاً 7">
+
+  <label>📊 حجم (گیگ):</label>
+  <input type="number" id="dataLimit" placeholder="مثلاً 10">
+
+  <label>📶 اپراتور:</label>
+  <select id="operator">
+    <option>ایرانسل</option>
+    <option>همراه اول</option>
+    <option>رایتل</option>
+    <option>وای فای</option>
+    <option>مخابرات</option>
+    <option>شاتل موبایل</option>
+    <option>های‌وب</option>
+    <option>آسیاتک</option>
+  </select>
+
+  <label>👥 تعداد کاربران:</label>
+  <input type="number" id="users" placeholder="مثلاً 1">
+
+  <label>🌍 کشور:</label>
+  <select id="country">
+    <option value="8.8">🇺🇸 آمریکا</option>
+    <option value="1.1">🇬🇧 انگلستان</option>
+    <option value="197.7">🇩🇪 آلمان</option>
+    <option value="197.4">🇹🇷 ترکیه</option>
+    <option value="7.28">🇦🇪 امارات</option>
+    <option value="31">🇮🇷 ایران</option>
+    <option value="200.1">🇮🇱 اسرائیل</option>
+    <option value="10.1">🇮🇶 عراق</option>
+    <option value="7.18">🇸🇦 عربستان</option>
+    <option value="5.20">🇪🇬 مصر</option>
+    <option value="9.9">🇸🇬 سنگاپور</option>
+    <option value="11.1">🇮🇳 هند</option>
+    <option value="12.1">🇵🇰 پاکستان</option>
+    <option value="13.1">🇷🇺 روسیه</option>
+    <option value="14.1">🇨🇳 چین</option>
+    <option value="15.1">🇯🇵 ژاپن</option>
+    <option value="16.1">🇰🇷 کره جنوبی</option>
+    <option value="17.1">🇮🇹 ایتالیا</option>
+    <option value="18.1">🇫🇷 فرانسه</option>
+    <option value="19.1">🇪🇸 اسپانیا</option>
+    <option value="20.1">🇨🇦 کانادا</option>
+    <option value="21.1">🇧🇷 برزیل</option>
+    <option value="22.1">🇦🇷 آرژانتین</option>
+    <option value="23.1">🇲🇽 مکزیک</option>
+    <option value="24.1">🇸🇪 سوئد</option>
+    <option value="25.1">🇳🇱 هلند</option>
+    <option value="26.1">🇨🇭 سوئیس</option>
+    <option value="27.1">🇳🇴 نروژ</option>
+    <option value="28.1">🇩🇰 دانمارک</option>
+    <option value="29.1">🇿🇦 آفریقای جنوبی</option>
+    <option value="30.1">🇦🇺 استرالیا</option>
+  </select>
+
+  <label>🎮 بازی:</label>
+  <select id="game">
+    <option>پابجی</option>
+    <option>کالاف دیوتی</option>
+    <option>فری فایر</option>
+    <option>فورتنایت</option>
+    <option>ولورانت</option>
+    <option>کلش آف کلنز</option>
+    <option>بازی دیگر</option>
+  </select>
+
+  <button onclick="generateWireguard()">تولید وایرگارد 🎯</button>
+
+  <div class="output" id="output"></div>
+
+  <script>
+    function generateKey() {
+      const r = () =>
+        Array.from(crypto.getRandomValues(new Uint8Array(32)))
+          .map(b => String.fromCharCode(b)).join('');
+      return {
+        privateKey: btoa(r()) + "=",
+        publicKey: btoa(r()) + "=",
+      };
+    }
+
+    function generateWireguard() {
+      const days = document.getElementById("days").value;
+      const dataLimit = document.getElementById("dataLimit").value;
+      const operator = document.getElementById("operator").value;
+      const users = document.getElementById("users").value;
+      const countryPrefix = document.getElementById("country").value;
+      const game = document.getElementById("game").value;
+
+      const { privateKey, publicKey } = generateKey();
+      const dnsServer = countryPrefix + ".1";
+      const mtu = Math.floor(Math.random() * (65000 - 100) + 100);
+
+      const result = `🔐 WireGuard Settings
+🔸 Game: ${game}
+🔸 Private Key: ${privateKey}
+🔸 Public Key: ${publicKey}
+🔸 IP: 10.202.10.10
+🔸 DNS: ${dnsServer}, 10.202.10.11
+🔸 MTU: ${mtu}
+🔸 Days: ${days}
+🔸 Data Limit: ${dataLimit} GB
+🔸 Users: ${users}
+🔸 Operator: ${operator}`;
+
+      document.getElementById("output").innerText = result;
+    }
+  </script>
+
+</body>
+</html>
