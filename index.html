@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>ورود کاربران</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+    .login-box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #aaa;
+      width: 300px;
+      text-align: center;
+    }
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4ba;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #message {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-box">
+  <h2>ورود به سایت</h2>
+  <input type="text" id="username" placeholder="نام کاربری"><br>
+  <input type="password" id="password" placeholder="رمز عبور"><br>
+  <button onclick="login()">ورود</button>
+  <div id="message"></div>
+</div>
+
+<script>
+  // آرایه‌ای از کاربران مجاز
+  const users = [
+    { username: "rasandesign", password: "4ba.ir" },
+    { username: "admin", password: "1234" },
+    { username: "user1", password: "pass1" }
+  ];
+
+  function login() {
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const message = document.getElementById("message");
+
+    const found = users.find(user => user.username === username && user.password === password);
+
+    if (found) {
+      message.style.color = "green";
+      message.textContent = "ورود موفقیت‌آمیز بود!";
+      // اینجا می‌تونید کاربر رو به صفحه‌ای دیگر منتقل کنید
+      window.location.href = "index2.html";
+    } else {
+      message.style.color = "red";
+      message.textContent = "نام کاربری یا رمز اشتباه است.";
+    }
+  }
+</script>
+
+</body>
+</html>
